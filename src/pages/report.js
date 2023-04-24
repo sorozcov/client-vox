@@ -35,17 +35,21 @@ export default function GenerateReport() {
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("jwtAccommodation"), }
 
       })
-      result = await result.json()    
-      //download code 
-      const link = document.createElement('a');
-      link.href = result.file;
-      document.body.appendChild(link);    
-      link.click();
-      link.parentNode.removeChild(link);
+      result = await result.json()   
+      if(result.file){
+        //download code 
+        const link = document.createElement('a');
+        link.href = result.file;
+        document.body.appendChild(link);    
+        link.click();
+        link.parentNode.removeChild(link);
+      }else{
+        alert("Report could not be generated.")
+      }
       setIsLoading(false)
     }catch(e){
       console.log(e)
-      alert("Report could not be generated.")
+      
       setIsLoading(false);
     }
   }

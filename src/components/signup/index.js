@@ -28,6 +28,8 @@ export default function SignUp(){
             if(response.insertId){
                 router.push("/");
                 alert("Account created succesfully.");
+            }else{
+                alert("Could not sign up succesfully.");
             }
         }catch(e){
             alert("Could not sign up succesfully.");

@@ -24,8 +24,13 @@ export default function Login(){
                 body:JSON.stringify({email,password})
             });
             let jwtToken = await result.json();
-            localStorage.setItem("jwtAccommodation", jwtToken);
-            router.push("\list");
+            if(jwtToken.token){
+                localStorage.setItem("jwtAccommodation", jwtToken.token);
+                router.push("\list");
+            }else{
+                alert("Could not login.");
+            }
+           
         }catch(e){
             alert("Could not login.")
             console.log(e)

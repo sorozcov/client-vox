@@ -36,6 +36,7 @@ export default function AccommodationsList() {
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("jwtAccommodation"), }
 
       })
+      console.lo
       result = await result.json()    
       setAccommodations(result);
       setIsLoading(false)

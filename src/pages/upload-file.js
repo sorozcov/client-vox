@@ -30,8 +30,10 @@ export default function UploadFile() {
             body:formData
         });
         let response = await result.json();
-        if(response){
-            alert("File uploaded succesfully");
+        if(response.affectedRows){
+            alert(`File uploaded succesfully with ${response.affectedRows}`);
+        }else{
+          alert("File not be uploaded succesfully. Check file again.");
         }
     }catch(e){
         alert("File not be uploaded succesfully. Check file again.");
