@@ -1,38 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Client-vox
+This is the frontend for with the following requirements.
+##### 1. Autenticación de Usuarios
+
+##### PROBLEMA:
+
+Se debe contar con una tabla en la base de datos con los usuarios y contraseñas para autenticación del uso de la GUI.
+
+##### REQUERIMIENTO:
+
+Crear una tabla con los usuarios y sus respectivas contraseñas y hacer una página de inicio de sesión para proteger todas las páginas subsiguientes en la GUI.
+
+##### 2. Despliegue de GUI
+
+##### REQUERIMIENTO:
+
+Crear una GUI en donde el usuario que inició sesión exitosa pueda realizar las siguientes tareas:
+
+-   Cargar un archivo .csv para alimentar la lista de propiedades
+-   Ver una lista completa de propiedades y filtrarlas basado en los siguientes campos:
+    -   Cantidad de habitaciones
+    -   Rango de precio (mínimo y máximo)
+    -   Ubicación basada en rangos de kilómetros de un punto de referencia (zona perimetral)
+    -   Metraje de la propiedad
+    -   Posee balcón
+    -   Pet friendly
+    -   Piscina
+    -   Jardin
+-   Descargar un CSV o PDF con los resultados aplicados en el filtro
+  
 
 ## Getting Started
 
-First, run the development server:
+To run the development server do the following:
 
-```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
-```
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+Important: This repo uses the api of [https://github.com/sorozcov/server-vox](https://github.com/sorozcov/server-vox) 
+You need to run this repo too.
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## TODO
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+ - Still missing filters for report and general accommodations list.
+ - Needs to improve the way of saving the JWT Token of the user.
+ - Toasts are missing. Right now alerts are being shown. This also has to do with the API not sending the full message error.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
