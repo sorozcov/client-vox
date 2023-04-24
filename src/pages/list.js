@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import NavbarAccommodations from '../components/navbar';
 import { BASE_API_URL } from '@/constants';
 import TableStriped from '@/components/table';
-import { Row,Col,Accordion,Form,ButtonGroup,Button } from 'react-bootstrap';
+import { Row,Col,Accordion,Form,Button } from 'react-bootstrap';
 import dynamic from "next/dynamic"
 import withQuery from 'with-query';
 import Spinner from 'react-bootstrap/Spinner';
@@ -37,7 +37,6 @@ export default function AccommodationsList() {
 
       })
       result = await result.json()    
-      console.log(result.length)
       setAccommodations(result);
       setIsLoading(false)
     }catch(e){
@@ -75,8 +74,7 @@ export default function AccommodationsList() {
                         value={minPrice}
                         onChange={(e)=>setMinPrice(e.target.value)}
                         />
-                      <Form.Text className="text-muted">
-                      </Form.Text>
+                      
                   </Form.Group>
                 </Col>
                 <Col sm={12} md={4}>
@@ -87,8 +85,7 @@ export default function AccommodationsList() {
                         value={maxPrice}
                         onChange={(e)=>setMaxPrice(e.target.value)}
                         />
-                      <Form.Text className="text-muted">
-                      </Form.Text>
+                      
                   </Form.Group>
                 </Col>
                 <Col sm={12} md={4}>
@@ -99,8 +96,7 @@ export default function AccommodationsList() {
                         value={numberOfRooms}
                         onChange={(e)=>setNumberOfRooms(e.target.value)}
                         />
-                      <Form.Text className="text-muted">
-                      </Form.Text>
+                      
                   </Form.Group>
                 </Col>
               </Row>
