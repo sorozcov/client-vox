@@ -7,7 +7,7 @@ import { BASE_API_URL } from '@/constants';
 export default function SignUp(){
     useEffect(()=>{
         if(localStorage.getItem("jwtAccommodation")!='null'){
-            router.push("\home");
+            router.push("\list");
         }
     })
 

@@ -7,7 +7,7 @@ import { BASE_API_URL } from '../../constants';
 export default function Login(){
     useEffect(()=>{
         if(localStorage.getItem("jwtAccommodation")!='null'){
-            router.push("\home");
+            router.push("\list");
         }
     })
 
@@ -25,7 +25,7 @@ export default function Login(){
             });
             let jwtToken = await result.json();
             localStorage.setItem("jwtAccommodation", jwtToken);
-            router.push("\home");
+            router.push("\list");
         }catch(e){
             alert("Could not login.")
             console.log(e)
