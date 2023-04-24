@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
-import Login from '../components/login'
 import { Navbar ,Container} from 'react-bootstrap'
+import SignUp from '../components/signup';
 export default function Home() {
   return (
     <>
@@ -15,7 +15,7 @@ export default function Home() {
 
       <main>
           <Container>
-              <Login />
+              <SignUp />
           </Container>
       </main>
    
