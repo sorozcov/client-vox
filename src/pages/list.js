@@ -4,8 +4,10 @@ import { useRouter } from 'next/router'
 import NavbarAccommodations from '../components/navbar';
 import { BASE_API_URL } from '@/constants';
 import TableStriped from '@/components/table';
-import { Row,Col } from 'react-bootstrap';
+import { Row,Col,Accordion,Form,ButtonGroup,Button } from 'react-bootstrap';
 import dynamic from "next/dynamic"
+import withQuery from 'with-query';
+import Spinner from 'react-bootstrap/Spinner';
 
 const MapAccomodation = dynamic(() => import("@/components/map"), { ssr:false })
 
@@ -14,6 +16,11 @@ const headers = ['AccommodationId','AccommodationLatitude', 'AccommodationLongit
 export default function AccommodationsList() {
   const router = useRouter();
   const [accommmodations,setAccommodations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [minPrice,setMinPrice] = useState("");
+  const [maxPrice,setMaxPrice] = useState("");
+  const [numberOfRooms,setNumberOfRooms] = useState("");
+
   useEffect(()=>{
     if(localStorage.getItem("jwtAccommodation")=='null'){
         router.push("/");
@@ -22,16 +29,20 @@ export default function AccommodationsList() {
 
   const fetchAccommodations = async () => {
     try{
-      let  result = await fetch(`${BASE_API_URL}/accommodation/getList`,{
+      setIsLoading(true);
+      let params = {minPrice,maxPrice,numberOfRooms};
+      let  result = await fetch(withQuery(`${BASE_API_URL}/accommodation/getList`,params),{
         method: 'get',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("jwtAccommodation"), }
 
       })
       result = await result.json()    
-    
+      console.log(result.length)
       setAccommodations(result);
+      setIsLoading(false)
     }catch(e){
       console.log(e)
+      setIsLoading(false);
     }
   };
 
@@ -49,8 +60,67 @@ export default function AccommodationsList() {
         <NavbarAccommodations></NavbarAccommodations>
         <div style={{marginLeft:'3vw', marginTop:'3vh',marginRight:'3vw'}}>
           <h2>List of Accommodations</h2>
-          
-          <Row>
+          <Accordion defaultActiveKey="0" style={{marginTop:'2vh',marginBottom:'1vh'}}>
+        <Accordion.Item eventKey="0">
+            <Accordion.Header>Filters</Accordion.Header>
+            <Accordion.Body>
+
+            <Form onSubmit={(e)=>{e.preventDefault();fetchAccommodations();}}>
+              <Row>
+                <Col sm={12} md={4}>
+                  <Form.Group className="mb-3" controlId="MinPrice">
+                      <Form.Label>Min Price</Form.Label>
+                      <Form.Control type="number" min={0} placeholder="Enter Min Price"  
+                        // required
+                        value={minPrice}
+                        onChange={(e)=>setMinPrice(e.target.value)}
+                        />
+                      <Form.Text className="text-muted">
+                      </Form.Text>
+                  </Form.Group>
+                </Col>
+                <Col sm={12} md={4}>
+                  <Form.Group className="mb-3" controlId="Max Price">
+                      <Form.Label>Max Price</Form.Label>
+                      <Form.Control type="number" min={0} placeholder="Enter Max Price"  
+                        // required
+                        value={maxPrice}
+                        onChange={(e)=>setMaxPrice(e.target.value)}
+                        />
+                      <Form.Text className="text-muted">
+                      </Form.Text>
+                  </Form.Group>
+                </Col>
+                <Col sm={12} md={4}>
+                  <Form.Group className="mb-3" controlId="NumberOfRooms">
+                      <Form.Label>Number of Rooms</Form.Label>
+                      <Form.Control type="number" min={0} placeholder="Enter Number of Rooms"  
+                        // required
+                        value={numberOfRooms}
+                        onChange={(e)=>setNumberOfRooms(e.target.value)}
+                        />
+                      <Form.Text className="text-muted">
+                      </Form.Text>
+                  </Form.Group>
+                </Col>
+              </Row>
+                
+              
+                    <Button variant="primary" type="submit" style={{marginRight:'0.5vw'}} >
+                        {'Filter'}
+                    </Button >
+                    {<Button variant="danger" style={{color:'white',marginRight:'0.5vw'}} onClick={()=>{setMaxPrice("");setMinPrice("");setNumberOfRooms("");fetchAccommodations();}}>
+                        Reset Filter
+                    </Button>}
+              
+            </Form>
+
+            </Accordion.Body>
+            
+        </Accordion.Item>
+        
+        </Accordion>
+          {isLoading ? <Spinner/>: <Row style={{marginBottom:'2vh'}}>
             <Col sm={12} md={8}>
             
          
@@ -63,7 +133,7 @@ export default function AccommodationsList() {
               <MapAccomodation data={accommmodations}/>
               </div>
             </Col>
-          </Row>
+          </Row>}
         </div>
 
       </main>
