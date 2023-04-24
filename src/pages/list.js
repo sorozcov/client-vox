@@ -16,6 +16,7 @@ const MapAccomodation = dynamic(() => import("@/components/map"), { ssr:false })
 const headers = ['AccommodationId','AccommodationLatitude', 'AccommodationLongitude', 'AccommodationTitle', 'AccommodationAdvertiser', 'AccommodationDescription', 'AccommodationIsReformed', 'AccommodationPhone', 'AccommodationType', 'AccommodationPrice', 'AccommodationPricePerMeter', 'AccommodationAddress', 'AccommodationProvince', 'AccommodationCity', 'AccommodationSquaredMeters', 'AccommodationNumberOfRooms', 'AccommodationNumberofBathrooms', 'AccommodationHasParking', 'AccommodationIsSecondHand', 'AccommodationHasFittedWardrobes', 'AccommodationYearBuilt', 'AccommodationIsFurnished', 'AccommodationHeatingType', 'AccommodationHasEnergeticCertification', 'AccommodationFloor', 'AccommodationIsExterior', 'AccommodationIsInterior', 'AccommodationHasElevator', 'AccommodationDate', 'AccommodationStreet', 'AccommodationNeighborhood', 'AccommodationDistrict', 'AccommodationHasRooftop', 'AccommodationHasStorageRoom', 'AccommodationIsKitchenEquipped', 'AccommodationIsFirstKitchenEquipped', 'AccommodationHasAirConditioner', 'AccommodationHasPool', 'AccommodationHasGarden', 'AccommodationUsefulSquaredMeters', 'AccommodationIsSuitableForPeopleWithReducedMobility', 'AccommodationNumberOfFloors', 'AccommodationIsPetFriendly', 'AccommodationHasBalcony']
 export default function AccommodationsList() {
   const router = useRouter();
+  const [validatedAuth, setValidatedAuth] = useState(false);
   const [accommmodations,setAccommodations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [minPrice,setMinPrice] = useState("");
@@ -25,6 +26,8 @@ export default function AccommodationsList() {
   useEffect(()=>{
     if(localStorage.getItem("jwtAccommodation")=='null'){
         router.push("/");
+    }else{
+      setValidatedAuth(true);
     }
   })
 
@@ -52,7 +55,7 @@ export default function AccommodationsList() {
   },[])
 
   return (
-    <>
+    validatedAuth ? <>
       <Head>
         <title>Vox Accommodations App</title>
         <link rel="icon" href="/favicon.png" />
@@ -135,6 +138,6 @@ export default function AccommodationsList() {
         </div>
 
       </main>
-    </>
+    </> :<></>
   )
 }

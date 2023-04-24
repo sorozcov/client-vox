@@ -1,7 +1,7 @@
 
 import { Table } from "react-bootstrap"
 
-export default function TableStriped({headers,data}){
+export default function TableStriped({headers=[],data=[]}){
     return(
         <Table striped bordered>
         <thead>
