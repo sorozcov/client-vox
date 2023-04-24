@@ -48,7 +48,6 @@ You need to run this repo too.
 
 ## TODO
 
- - Still missing filters for report.
  - Needs to improve the way of saving the JWT Token of the user.
  - Toasts are missing. Right now alerts are being shown. This also has to do with the API not sending the full message error.
 
