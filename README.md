@@ -1,5 +1,6 @@
 
 ## Client-vox
+This is published https://client-vox-a1mx.vercel.app/ 
 This is the frontend for with the following requirements.
 ##### 1. Autenticación de Usuarios
 
