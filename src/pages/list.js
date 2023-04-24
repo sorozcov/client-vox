@@ -8,6 +8,7 @@ import { Row,Col,Accordion,Form,Button } from 'react-bootstrap';
 import dynamic from "next/dynamic"
 import withQuery from 'with-query';
 import Spinner from 'react-bootstrap/Spinner';
+import toast from 'react-hot-toast';
 
 const MapAccomodation = dynamic(() => import("@/components/map"), { ssr:false })
 
@@ -36,12 +37,12 @@ export default function AccommodationsList() {
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("jwtAccommodation"), }
 
       })
-      console.lo
       result = await result.json()    
       setAccommodations(result);
       setIsLoading(false)
     }catch(e){
       console.log(e)
+      toast.error(e);
       setIsLoading(false);
     }
   };

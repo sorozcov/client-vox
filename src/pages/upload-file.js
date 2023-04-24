@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import NavbarAccommodations from '../components/navbar';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 import { BASE_API_URL } from '@/constants';
-
+import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 
 export default function UploadFile() {
@@ -31,12 +31,12 @@ export default function UploadFile() {
         });
         let response = await result.json();
         if(response.affectedRows){
-            alert(`File uploaded succesfully with ${response.affectedRows}`);
+            toast.success(`File uploaded succesfully with ${response.affectedRows}`);
         }else{
-          alert("File not be uploaded succesfully. Check file again.");
+          toast.error("File not be uploaded succesfully. Check file again.");
         }
     }catch(e){
-        alert("File not be uploaded succesfully. Check file again.");
+        toast.error("File not be uploaded succesfully. Check file again.");
         console.log(e);
     }
 };

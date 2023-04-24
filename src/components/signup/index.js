@@ -3,6 +3,7 @@ import {Button, Form, Row,Col, Card} from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useEffect,useState } from 'react';
 import { BASE_API_URL } from '@/constants';
+import toast from 'react-hot-toast';
 
 export default function SignUp(){
     useEffect(()=>{
@@ -27,12 +28,12 @@ export default function SignUp(){
             let response = await result.json();
             if(response.insertId){
                 router.push("/");
-                alert("Account created succesfully.");
+                toast.success("Account created succesfully.");
             }else{
-                alert("Could not sign up succesfully.");
+                toast.error("Could not sign up succesfully.");
             }
         }catch(e){
-            alert("Could not sign up succesfully.");
+            toast.error("Could not sign up succesfully.");
             console.log(e);
         }
     };

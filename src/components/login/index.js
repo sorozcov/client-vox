@@ -3,6 +3,8 @@ import {Button, Form, Row,Col, Card} from 'react-bootstrap';
 import { useRouter } from 'next/router'
 import { useState,useEffect } from 'react';
 import { BASE_API_URL } from '../../constants';
+import toast from 'react-hot-toast';
+import jwt_decode from "jwt-decode";
 
 export default function Login(){
     useEffect(()=>{
@@ -25,14 +27,16 @@ export default function Login(){
             });
             let jwtToken = await result.json();
             if(jwtToken.token){
+                const user = jwt_decode(jwtToken.token);
+                toast.success(`Welcome ${user.userName}`);
                 localStorage.setItem("jwtAccommodation", jwtToken.token);
                 router.push("\list");
             }else{
-                alert("Could not login.");
+                toast.error("Could not login. Verify credentials.");
             }
            
         }catch(e){
-            alert("Could not login.")
+            toast.error("Could not login. Verify credentials.");
             console.log(e)
         }
     };

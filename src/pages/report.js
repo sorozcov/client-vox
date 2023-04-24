@@ -7,7 +7,7 @@ import withQuery from 'with-query';
 import { BASE_API_URL } from '@/constants';
 import { Row,Col,Accordion,Form,ButtonGroup,Button } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
-
+import toast from 'react-hot-toast';
 
 export default function GenerateReport() {
   const router = useRouter();
@@ -43,8 +43,9 @@ export default function GenerateReport() {
         document.body.appendChild(link);    
         link.click();
         link.parentNode.removeChild(link);
+        toast.success(`Report generated succesfully.`)
       }else{
-        alert("Report could not be generated.")
+        toast.error("Report could not be generated.")
       }
       setIsLoading(false)
     }catch(e){
